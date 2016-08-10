@@ -13,7 +13,7 @@ public class Main {
         initialLibrary.add(new Book("Book 2", "Author 2", "2002", printStream));
         initialLibrary.add(new Book("Book 3", "Author 3", "2003", printStream));
 
-        Biblioteca biblioteca = new Biblioteca(printStream, initialLibrary);
+        Biblioteca biblioteca = new Biblioteca(printStream, initialLibrary, new MainMenu(printStream));
         biblioteca.start();
     }
 

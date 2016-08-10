@@ -16,6 +16,7 @@ public class BibliotecaTest {
     private Book book1;
     private Book book2;
     private Book book3;
+    private MainMenu mainMenu;
 
     private ArrayList<Book> makeEmptyLibrary() {
         return new ArrayList<>();
@@ -35,8 +36,9 @@ public class BibliotecaTest {
         book1 = mock(Book.class);
         book2 = mock(Book.class);
         book3 = mock(Book.class);
+        mainMenu = mock(MainMenu.class);
 
-        biblioteca = new Biblioteca(printStream, makePopulatedLibrary());
+        biblioteca = new Biblioteca(printStream, makePopulatedLibrary(), mainMenu);
     }
 
     @Test
@@ -60,5 +62,25 @@ public class BibliotecaTest {
         biblioteca.start();
 
         verify(printStream).print("List Books");
+    }
+
+//    @Test
+//    public void shouldListBooksWhenOption1IsChosen() throws Exception {
+//        // biblioteca.start();
+//
+//        // menu waitForSelection();
+//        // menu.selectOption(1);
+//
+//        verify(book1).print();
+//        verify(book2).print();
+//        verify(book3).print();
+//    }
+
+
+    @Test
+    public void shouldStartMenuWhenStarted() throws Exception {
+        biblioteca.start();
+
+        verify(mainMenu).start();
     }
 }

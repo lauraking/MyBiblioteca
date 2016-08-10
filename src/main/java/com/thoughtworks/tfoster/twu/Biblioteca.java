@@ -7,16 +7,18 @@ public class Biblioteca {
 
     private PrintStream printStream;
     private ArrayList<Book> library;
+    private MainMenu mainMenu;
 
-    public Biblioteca(PrintStream printStream, ArrayList<Book> initialLibrary) {
+    public Biblioteca(PrintStream printStream, ArrayList<Book> initialLibrary, MainMenu mainMenu) {
         this.printStream = printStream;
         this.library = initialLibrary;
+        this.mainMenu = mainMenu;
     }
 
     public void start() {
         printStream.println("Welcome!");
         printLibrary();
-        showMenu();
+        mainMenu.start();
     }
 
     private void printLibrary() {
@@ -24,7 +26,4 @@ public class Biblioteca {
             book.print();
     }
 
-    private void showMenu() {
-        printStream.print("List Books");
-    }
 }
