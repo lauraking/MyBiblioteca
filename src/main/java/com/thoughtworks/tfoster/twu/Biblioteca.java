@@ -16,10 +16,15 @@ public class Biblioteca {
     public void start() {
         printStream.println("Welcome!");
         printLibrary();
+        showMenu();
     }
 
     private void printLibrary() {
         for(Book book : library)
             book.print();
+    }
+
+    private void showMenu() {
+        printStream.print("List Books");
     }
 }

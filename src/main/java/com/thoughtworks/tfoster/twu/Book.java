@@ -4,6 +4,9 @@ import java.io.PrintStream;
 
 public class Book {
 
+    public static final int TITLE_WIDTH = 15;
+    private static final int AUTHOR_WIDTH = 15;
+
     private String title;
     private String author;
     private String yearPublished;
@@ -17,11 +20,17 @@ public class Book {
     }
 
     public void print() {
-        printStream.print(title);
+        printStream.print(fixFieldWidth(title, TITLE_WIDTH));
         printStream.print(" | ");
-        printStream.print(author);
+        printStream.print(fixFieldWidth(author, AUTHOR_WIDTH));
         printStream.print(" | ");
-        printStream.print(yearPublished);
+        printStream.print(fixFieldWidth(yearPublished, 4));
         printStream.print("\n");
+    }
+
+    private String fixFieldWidth(String field, int width) {
+        String maxedString = field.substring(0, Math.min(field.length(), width));
+
+        return String.format("%1$" + width + "s", maxedString);
     }
 }

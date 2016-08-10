@@ -46,12 +46,19 @@ public class BibliotecaTest {
         verify(printStream).println("Welcome!");
     }
 
+//    @Test
+//    public void shouldSeeListOfBooksInLibraryAfterWelcome() throws Exception {
+//        biblioteca.start();
+//
+//        verify(book1).print();
+//        verify(book2).print();
+//        verify(book3).print();
+//    }
+
     @Test
-    public void shouldSeeListOfBooksInLibraryAfterWelcome() throws Exception {
+    public void shouldSeeListBooksWhenStarted() throws Exception {
         biblioteca.start();
 
-        verify(book1).print();
-        verify(book2).print();
-        verify(book3).print();
+        verify(printStream).print("List Books");
     }
 }

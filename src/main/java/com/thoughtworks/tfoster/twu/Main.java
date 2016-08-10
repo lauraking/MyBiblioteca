@@ -9,7 +9,7 @@ public class Main {
         ArrayList<Book> initialLibrary = new ArrayList<>();
         PrintStream printStream = System.out;
 
-        initialLibrary.add(new Book("Book 1", "Author 1", "2001", printStream));
+        initialLibrary.add(new Book("Book 147238426738423764", "Author 1", "2001", printStream));
         initialLibrary.add(new Book("Book 2", "Author 2", "2002", printStream));
         initialLibrary.add(new Book("Book 3", "Author 3", "2003", printStream));
 
