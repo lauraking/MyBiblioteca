@@ -82,6 +82,6 @@ public class BibliotecaTest {
     public void shouldLetUserSelectFromOptionsWhenStarted() throws Exception {
         biblioteca.start();
 
-        verify(mainMenu).userOptionSelection();
+        verify(mainMenu).processUserSelection();
     }
 }

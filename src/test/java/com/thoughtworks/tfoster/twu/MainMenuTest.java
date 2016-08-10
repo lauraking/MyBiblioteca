@@ -24,6 +24,7 @@ public class MainMenuTest {
 
         options = new ArrayList<>();
         options.add(mock(MenuOption.class));
+        options.add(mock(MenuOption.class));
         reader = mock(BufferedReader.class);
 
         mainMenu = new MainMenu(printStream, reader, options);
@@ -36,18 +37,38 @@ public class MainMenuTest {
         verify(printStream).print("1: List Books");
     }
 
-//    @Test
-//    public void shouldAcceptUsersChoiceWhenOption1Selected() throws Exception {
-//
-//
-//    }
+    @Test
+    public void shouldRunSecondOptionWhenOption2IsChosen() throws Exception {
+        when(reader.readLine()).thenReturn("2");
+        mainMenu.processUserSelection();
+        verify(options.get(1)).run();
+    }
+
 
     @Test
     public void shouldPrintBooksWhenOption1IsChosen() throws Exception {
         when(reader.readLine()).thenReturn("1");
 
-        mainMenu.userOptionSelection();
+        mainMenu.processUserSelection();
 
         verify(options.get(0)).run();
+    }
+
+    @Test
+    public void shouldInformUserToSelectValidOptionWhenNonnumericSelected() throws Exception {
+        when(reader.readLine()).thenReturn("*");
+
+        mainMenu.processUserSelection();
+
+        verify(printStream).println("Select a valid option!");
+    }
+
+    @Test
+    public void shouldInformUserToSelectValidOptionWhenInvalidNumberSelected() throws Exception {
+        when(reader.readLine()).thenReturn("-1");
+
+        mainMenu.processUserSelection();
+
+        verify(printStream).println("Select a valid option!");
     }
 }

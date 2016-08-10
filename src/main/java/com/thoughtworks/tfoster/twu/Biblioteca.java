@@ -18,7 +18,7 @@ public class Biblioteca {
     public void start() {
         printStream.println("Welcome!");
         mainMenu.showMenu();
-        mainMenu.userOptionSelection();
+        mainMenu.processUserSelection();
     }
 
 }

@@ -23,12 +23,27 @@ public class MainMenu {
 
     }
 
-    public void userOptionSelection() {
+    public void processUserSelection() {
+        printStream.print("\n> ");
 
         try {
-            options.get(Integer.parseInt(reader.readLine()) - 1).run();
-        } catch (IOException e) {
+            String userInput = reader.readLine();
+            if(isValidMenuSelection(userInput))
+                options.get(Integer.parseInt(userInput) - 1).run();
+            else
+                printStream.println("Select a valid option!");
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean isValidMenuSelection(String selection) {
+        if(selection.matches("\\d+")) {
+            int numericSelection = Integer.parseInt(selection);
+            return 0 < numericSelection && numericSelection <= options.size();
+        }
+        else
+            return false;
     }
 }
