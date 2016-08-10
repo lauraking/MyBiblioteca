@@ -50,23 +50,17 @@ public class BibliotecaTest {
 
 //    @Test
 //    public void shouldSeeListOfBooksInLibraryAfterWelcome() throws Exception {
-//        biblioteca.start();
+//        biblioteca.showMenu();
 //
 //        verify(book1).print();
 //        verify(book2).print();
 //        verify(book3).print();
 //    }
 
-    @Test
-    public void shouldSeeListBooksWhenStarted() throws Exception {
-        biblioteca.start();
-
-        verify(printStream).print("List Books");
-    }
 
 //    @Test
 //    public void shouldListBooksWhenOption1IsChosen() throws Exception {
-//        // biblioteca.start();
+//        // biblioteca.showMenu();
 //
 //        // menu waitForSelection();
 //        // menu.selectOption(1);
@@ -81,6 +75,13 @@ public class BibliotecaTest {
     public void shouldStartMenuWhenStarted() throws Exception {
         biblioteca.start();
 
-        verify(mainMenu).start();
+        verify(mainMenu).showMenu();
+    }
+
+    @Test
+    public void shouldLetUserSelectFromOptionsWhenStarted() throws Exception {
+        biblioteca.start();
+
+        verify(mainMenu).userOptionSelection();
     }
 }

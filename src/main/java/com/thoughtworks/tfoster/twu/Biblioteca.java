@@ -1,15 +1,15 @@
 package com.thoughtworks.tfoster.twu;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
+import java.util.Collection;
 
 public class Biblioteca {
 
     private PrintStream printStream;
-    private ArrayList<Book> library;
+    private Collection<Book> library;
     private MainMenu mainMenu;
 
-    public Biblioteca(PrintStream printStream, ArrayList<Book> initialLibrary, MainMenu mainMenu) {
+    public Biblioteca(PrintStream printStream, Collection<Book> initialLibrary, MainMenu mainMenu) {
         this.printStream = printStream;
         this.library = initialLibrary;
         this.mainMenu = mainMenu;
@@ -17,13 +17,8 @@ public class Biblioteca {
 
     public void start() {
         printStream.println("Welcome!");
-        printLibrary();
-        mainMenu.start();
-    }
-
-    private void printLibrary() {
-        for(Book book : library)
-            book.print();
+        mainMenu.showMenu();
+        mainMenu.userOptionSelection();
     }
 
 }

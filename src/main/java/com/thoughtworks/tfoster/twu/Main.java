@@ -1,7 +1,10 @@
 package com.thoughtworks.tfoster.twu;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
 
@@ -13,7 +16,12 @@ public class Main {
         initialLibrary.add(new Book("Book 2", "Author 2", "2002", printStream));
         initialLibrary.add(new Book("Book 3", "Author 3", "2003", printStream));
 
-        Biblioteca biblioteca = new Biblioteca(printStream, initialLibrary, new MainMenu(printStream));
+        ArrayList<MenuOption> options = new ArrayList<>();
+        options.add(new PrintLibraryOption(initialLibrary));
+
+
+        MainMenu mainMenu = new MainMenu(printStream, new BufferedReader(new InputStreamReader(System.in)), options);
+        Biblioteca biblioteca = new Biblioteca(printStream, initialLibrary, mainMenu);
         biblioteca.start();
     }
 
