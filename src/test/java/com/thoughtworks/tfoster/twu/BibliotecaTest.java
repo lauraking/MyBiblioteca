@@ -2,12 +2,14 @@ package com.thoughtworks.tfoster.twu;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
+import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 public class BibliotecaTest {
 
@@ -30,6 +32,20 @@ public class BibliotecaTest {
         return library;
     }
 
+    private Answer<Void> quitBiblioteca() {
+        return new Answer() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                biblioteca.quit();
+                return null;
+            }
+        };
+    }
+
+    private void quitAfterFirstRun() {
+        doAnswer(quitBiblioteca()).when(mainMenu).processUserSelection();
+    }
+
     @Before
     public void setUp() throws Exception {
         printStream = mock(PrintStream.class);
@@ -43,36 +59,15 @@ public class BibliotecaTest {
 
     @Test
     public void shouldSeeWelcomeMessageWhenStarted() throws Exception {
+        quitAfterFirstRun();
         biblioteca.start();
 
         verify(printStream).println("Welcome!");
     }
 
-//    @Test
-//    public void shouldSeeListOfBooksInLibraryAfterWelcome() throws Exception {
-//        biblioteca.showMenu();
-//
-//        verify(book1).print();
-//        verify(book2).print();
-//        verify(book3).print();
-//    }
-
-
-//    @Test
-//    public void shouldListBooksWhenOption1IsChosen() throws Exception {
-//        // biblioteca.showMenu();
-//
-//        // menu waitForSelection();
-//        // menu.selectOption(1);
-//
-//        verify(book1).print();
-//        verify(book2).print();
-//        verify(book3).print();
-//    }
-
-
     @Test
     public void shouldStartMenuWhenStarted() throws Exception {
+        quitAfterFirstRun();
         biblioteca.start();
 
         verify(mainMenu).showMenu();
@@ -80,8 +75,18 @@ public class BibliotecaTest {
 
     @Test
     public void shouldLetUserSelectFromOptionsWhenStarted() throws Exception {
+        quitAfterFirstRun();
         biblioteca.start();
 
         verify(mainMenu).processUserSelection();
+    }
+
+    @Test
+    public void shouldContinueAskingForUserSelectionUntilQuit() throws Exception {
+        doNothing().doNothing().doAnswer(quitBiblioteca()).when(mainMenu).processUserSelection();
+
+        biblioteca.start();
+
+        verify(mainMenu, times(3)).processUserSelection();
     }
 }

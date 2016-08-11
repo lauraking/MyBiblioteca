@@ -1,11 +1,12 @@
-package com.thoughtworks.tfoster.twu;
+package com.thoughtworks.tfoster.twu.options;
 
+import com.thoughtworks.tfoster.twu.Book;
+import com.thoughtworks.tfoster.twu.options.PrintLibraryOption;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 

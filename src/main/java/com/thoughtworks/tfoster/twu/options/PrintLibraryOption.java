@@ -1,4 +1,6 @@
-package com.thoughtworks.tfoster.twu;
+package com.thoughtworks.tfoster.twu.options;
+
+import com.thoughtworks.tfoster.twu.Book;
 
 import java.util.Collection;
 
@@ -8,6 +10,11 @@ public class PrintLibraryOption implements MenuOption {
 
     public PrintLibraryOption(Collection<Book> books) {
         this.books = books;
+    }
+
+    @Override
+    public String title() {
+        return "List Books";
     }
 
     @Override

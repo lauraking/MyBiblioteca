@@ -1,10 +1,13 @@
 package com.thoughtworks.tfoster.twu;
 
+import com.thoughtworks.tfoster.twu.options.MenuOption;
+import com.thoughtworks.tfoster.twu.options.PrintLibraryOption;
+import com.thoughtworks.tfoster.twu.options.QuitOption;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main {
 
@@ -22,6 +25,8 @@ public class Main {
 
         MainMenu mainMenu = new MainMenu(printStream, new BufferedReader(new InputStreamReader(System.in)), options);
         Biblioteca biblioteca = new Biblioteca(printStream, initialLibrary, mainMenu);
+        options.add(new QuitOption(biblioteca));
+
         biblioteca.start();
     }
 

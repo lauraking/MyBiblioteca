@@ -8,6 +8,7 @@ public class Biblioteca {
     private PrintStream printStream;
     private Collection<Book> library;
     private MainMenu mainMenu;
+    private boolean running;
 
     public Biblioteca(PrintStream printStream, Collection<Book> initialLibrary, MainMenu mainMenu) {
         this.printStream = printStream;
@@ -16,9 +17,20 @@ public class Biblioteca {
     }
 
     public void start() {
+        running = true;
         printStream.println("Welcome!");
-        mainMenu.showMenu();
-        mainMenu.processUserSelection();
+
+        while(isRunning()) {
+            mainMenu.showMenu();
+            mainMenu.processUserSelection();
+        }
     }
 
+    public void quit() {
+        running = false;
+    }
+
+    private boolean isRunning() {
+        return running;
+    }
 }

@@ -1,5 +1,8 @@
 package com.thoughtworks.tfoster.twu;
 
+import com.thoughtworks.tfoster.twu.options.MenuOption;
+import com.thoughtworks.tfoster.twu.options.PrintLibraryOption;
+import com.thoughtworks.tfoster.twu.options.QuitOption;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -7,9 +10,7 @@ import java.io.BufferedReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class MainMenuTest {
 
@@ -31,14 +32,46 @@ public class MainMenuTest {
     }
 
     @Test
-    public void shouldShowListBooksWhenStarted() throws Exception {
+    public void shouldSeeListBooksWhenListingBooksIsAnOption() throws Exception {
+        PrintLibraryOption printLibraryOption = mock(PrintLibraryOption.class);
+        when(printLibraryOption.title()).thenCallRealMethod();
+        options.add(printLibraryOption);
         mainMenu.showMenu();
 
-        verify(printStream).print("1: List Books");
+        verify(printStream).print("List Books");
+    }
+
+    @Test
+    public void shouldSeeQuitWhenQuittingIsAnOption() throws Exception {
+        QuitOption quitOption = mock(QuitOption.class);
+        when(quitOption.title()).thenCallRealMethod();
+        options.add(quitOption);
+        mainMenu.showMenu();
+
+        verify(printStream).print("Quit");
+    }
+
+    @Test
+    public void shouldSeeBothListBooksAndQuitWhenBothListingBooksAndQuittingAreOptions() throws Exception {
+        PrintLibraryOption printLibraryOption = mock(PrintLibraryOption.class);
+        when(printLibraryOption.title()).thenCallRealMethod();
+        QuitOption quitOption = mock(QuitOption.class);
+        when(quitOption.title()).thenCallRealMethod();
+
+        options.add(printLibraryOption);
+        options.add(quitOption);
+        mainMenu.showMenu();
+
+        verify(printStream).print("List Books");
+        verify(printStream).print("Quit");
     }
 
     @Test
     public void shouldRunSecondOptionWhenOption2IsChosen() throws Exception {
+        options.add(mock(MenuOption.class));
+        options.add(mock(MenuOption.class));
+        options.add(mock(MenuOption.class));
+
         when(reader.readLine()).thenReturn("2");
         mainMenu.processUserSelection();
         verify(options.get(1)).run();
@@ -47,6 +80,9 @@ public class MainMenuTest {
 
     @Test
     public void shouldPrintBooksWhenOption1IsChosen() throws Exception {
+        options.add(mock(MenuOption.class));
+        options.add(mock(MenuOption.class));
+        options.add(mock(MenuOption.class));
         when(reader.readLine()).thenReturn("1");
 
         mainMenu.processUserSelection();
@@ -71,4 +107,5 @@ public class MainMenuTest {
 
         verify(printStream).println("Select a valid option!");
     }
+
 }
