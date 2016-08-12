@@ -6,8 +6,9 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 public class LibraryTest {
@@ -43,12 +44,21 @@ public class LibraryTest {
     @Test
     public void shouldNotContainBookInAvailableBooksWhenBookIsCheckedOut() throws Exception {
         String title = "Title of book";
-        when(book1.hasTitle(title)).thenReturn(false);
         when(book2.hasTitle(title)).thenReturn(true);
-        when(book3.hasTitle(title)).thenReturn(false);
         library.checkoutBook(title);
 
         assertFalse(books.contains(book2));
     }
 
+    @Test
+    public void shouldReturnTrueWhenBookIsInLibrary() throws Exception {
+        when(book2.hasTitle("Title")).thenReturn(true);
+
+        assertThat(library.isBookAvailable("Title"), is(true));
+    }
+
+    @Test
+    public void shouldReturnFalseWhenBookIsNotInLibrary() throws Exception {
+        assertThat(library.isBookAvailable("Title"), is(false));
+    }
 }

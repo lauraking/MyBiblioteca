@@ -35,6 +35,9 @@ public class CheckoutBookOption implements MenuOption {
             e.printStackTrace();
         }
 
-        library.checkoutBook(title);
+        if(library.isBookAvailable(title)) {
+            library.checkoutBook(title);
+            printStream.println("Thank you! Enjoy the book");
+        }
     }
 }

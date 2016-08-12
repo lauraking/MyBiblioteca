@@ -27,7 +27,6 @@ public class Main {
         options.add(new PrintLibraryOption(library));
         options.add(new CheckoutBookOption(library, printStream, reader));
 
-
         MainMenu mainMenu = new MainMenu(printStream, reader, options);
         Biblioteca biblioteca = new Biblioteca(printStream, mainMenu);
         options.add(new QuitOption(biblioteca));

@@ -7,10 +7,7 @@ import org.junit.Test;
 import java.io.BufferedReader;
 import java.io.PrintStream;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class CheckoutBookOptionTest {
 
@@ -45,8 +42,28 @@ public class CheckoutBookOptionTest {
     public void shouldCheckoutSpecifiedBookFromLibraryWhenRun() throws Exception {
         String bookTitle = "Title of Book";
         when(bufferedReader.readLine()).thenReturn(bookTitle);
+        when(library.isBookAvailable(bookTitle)).thenReturn(true);
         option.run();
 
         verify(library).checkoutBook(bookTitle);
+    }
+
+    @Test
+    public void shouldCheckIfBookHasBeenCheckedOutWhenRun() throws Exception {
+        String bookTitle = "Title of Book";
+        when(bufferedReader.readLine()).thenReturn(bookTitle);
+        option.run();
+
+        verify(library).isBookAvailable(bookTitle);
+    }
+
+    @Test
+    public void shouldPrintSuccessMessageIfBookHasBeenCheckedOut() throws Exception {
+        String bookTitle = "Title of Book";
+        when(bufferedReader.readLine()).thenReturn(bookTitle);
+        when(library.isBookAvailable(bookTitle)).thenReturn(true);
+        option.run();
+
+        verify(printStream).println("Thank you! Enjoy the book");
     }
 }

@@ -24,4 +24,12 @@ public class Library {
             }
         }
     }
+
+    public boolean isBookAvailable(String bookTitle) {
+        for(Book book : books) {
+            if(book.hasTitle(bookTitle))
+                return true;
+        }
+        return false;
+    }
 }
