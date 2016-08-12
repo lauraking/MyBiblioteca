@@ -1,5 +1,6 @@
 package com.thoughtworks.tfoster.twu.options;
 
+import com.thoughtworks.tfoster.twu.Library;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,18 +10,21 @@ import java.io.PrintStream;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class CheckoutBookOptionTest {
 
     private PrintStream printStream;
     private CheckoutBookOption option;
     private BufferedReader bufferedReader;
+    private Library library;
 
     @Before
     public void setUp() throws Exception {
         printStream = mock(PrintStream.class);
         bufferedReader = mock(BufferedReader.class);
-        option = new CheckoutBookOption(printStream, bufferedReader);
+        library = mock(Library.class);
+        option = new CheckoutBookOption(library, printStream, bufferedReader);
     }
 
     @Test
@@ -35,5 +39,14 @@ public class CheckoutBookOptionTest {
         option.run();
 
         verify(bufferedReader).readLine();
+    }
+
+    @Test
+    public void shouldCheckoutSpecifiedBookFromLibraryWhenRun() throws Exception {
+        String bookTitle = "Title of Book";
+        when(bufferedReader.readLine()).thenReturn(bookTitle);
+        option.run();
+
+        verify(library).checkoutBook(bookTitle);
     }
 }

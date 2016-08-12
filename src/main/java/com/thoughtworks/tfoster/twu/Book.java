@@ -33,4 +33,8 @@ public class Book {
 
         return String.format("%1$" + width + "s", maxedString);
     }
+
+    public boolean hasTitle(String title) {
+        return this.title.equals(title);
+    }
 }

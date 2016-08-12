@@ -15,4 +15,13 @@ public class Library {
         for(Book book : books)
             book.print();
     }
+
+    public void checkoutBook(String bookTitle) {
+        for(Book book : books) {
+            if(book.hasTitle(bookTitle)) {
+                books.remove(book);
+                return;
+            }
+        }
+    }
 }

@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import java.io.PrintStream;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -35,5 +37,21 @@ public class BookTest {
         verify(printStream).print("Title is way to");
         verify(printStream).print("         Author");
         verify(printStream).print("2001");
+    }
+
+    @Test
+    public void shouldReturnTrueWhenTitleMatches() throws Exception {
+        String title = "Expected Title";
+        Book book = new Book(title, "", "", printStream);
+
+        assertTrue(book.hasTitle(title));
+    }
+
+    @Test
+    public void shouldReturnFalseWhenTitleDoesntMatch() throws Exception {
+        String title = "Expected Title";
+        Book book = new Book(title, "", "", printStream);
+
+        assertFalse(book.hasTitle("Other Title"));
     }
 }
