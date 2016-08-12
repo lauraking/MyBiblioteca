@@ -17,19 +17,17 @@ public class Library {
     }
 
     public void checkoutBook(String bookTitle) {
-        for(Book book : books) {
-            if(book.hasTitle(bookTitle)) {
-                books.remove(book);
-                return;
-            }
-        }
+        books.remove(getBookWithTitle(bookTitle));
     }
 
-    public boolean isBookAvailable(String bookTitle) {
-        for(Book book : books) {
-            if(book.hasTitle(bookTitle))
-                return true;
-        }
-        return false;
+    public boolean isBookAvailable(String title) {
+        return getBookWithTitle(title) != null;
+    }
+
+    private Book getBookWithTitle(String title) {
+        for(Book book : books)
+            if(book.hasTitle(title))
+                return book;
+        return null;
     }
 }

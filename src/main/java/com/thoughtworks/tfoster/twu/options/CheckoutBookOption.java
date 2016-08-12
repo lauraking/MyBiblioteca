@@ -27,17 +27,21 @@ public class CheckoutBookOption implements MenuOption {
     public void run() {
         printStream.println("Type in the title of the book you want to check out:");
 
-        String title = "";
-
-        try {
-            title = bufferedReader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String title = readTitleFromUser();
 
         if(library.isBookAvailable(title)) {
             library.checkoutBook(title);
             printStream.println("Thank you! Enjoy the book");
         }
     }
+
+    private String readTitleFromUser() {
+        try {
+            return bufferedReader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
