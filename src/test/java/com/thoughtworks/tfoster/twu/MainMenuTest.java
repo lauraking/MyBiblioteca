@@ -77,7 +77,6 @@ public class MainMenuTest {
         verify(options.get(1)).run();
     }
 
-
     @Test
     public void shouldPrintBooksWhenOption1IsChosen() throws Exception {
         options.add(mock(MenuOption.class));

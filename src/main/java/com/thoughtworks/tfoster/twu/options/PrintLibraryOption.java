@@ -19,7 +19,7 @@ public class PrintLibraryOption implements MenuOption {
 
     @Override
     public void run() {
-        for (Book book : books){
+        for (Book book : books) {
             book.print();
         }
     }
