@@ -16,7 +16,9 @@ public class LibraryTest {
     private Book book1;
     private Book book2;
     private Book book3;
+    private Book book4;
     private Collection<Book> books;
+    private Collection<Book> checkedOutBooks;
     private Library library;
 
     @Before
@@ -24,12 +26,16 @@ public class LibraryTest {
         book1 = mock(Book.class);
         book2 = mock(Book.class);
         book3 = mock(Book.class);
+        book4 = mock(Book.class);
         books = new ArrayList<>();
         books.add(book1);
         books.add(book2);
         books.add(book3);
 
-        library = new Library(books);
+        checkedOutBooks = new ArrayList<>();
+        checkedOutBooks.add(book4);
+
+        library = new Library(books, checkedOutBooks);
     }
 
     @Test
@@ -60,5 +66,17 @@ public class LibraryTest {
     @Test
     public void shouldReturnFalseWhenBookIsNotInLibrary() throws Exception {
         assertThat(library.isBookAvailable("Title"), is(false));
+    }
+
+    @Test
+    public void shouldReturnTrueWhenBookIsCheckedOut() throws Exception {
+        when(book4.hasTitle("Title")).thenReturn(true);
+
+        assertThat(library.isBookCheckedOut("Title"), is(true));
+    }
+
+    @Test
+    public void shouldReturnFalseWhenBookIsNotCheckedOut() throws Exception {
+        assertThat(library.isBookCheckedOut("Title"), is(false));
     }
 }

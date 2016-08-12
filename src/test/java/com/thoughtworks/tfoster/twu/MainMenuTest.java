@@ -3,6 +3,7 @@ package com.thoughtworks.tfoster.twu;
 import com.thoughtworks.tfoster.twu.options.MenuOption;
 import com.thoughtworks.tfoster.twu.options.PrintLibraryOption;
 import com.thoughtworks.tfoster.twu.options.QuitOption;
+import com.thoughtworks.tfoster.twu.options.ReturnBookOption;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -49,6 +50,16 @@ public class MainMenuTest {
         mainMenu.showMenu();
 
         verify(printStream).print("Quit");
+    }
+
+    @Test
+    public void shouldSeeReturnBooksWhenReturningIsAnOption() throws Exception {
+        ReturnBookOption returnBookOption = mock(ReturnBookOption.class);
+        when(returnBookOption.title()).thenCallRealMethod();
+        options.add(returnBookOption);
+        mainMenu.showMenu();
+
+        verify(printStream).print("Return book");
     }
 
     @Test

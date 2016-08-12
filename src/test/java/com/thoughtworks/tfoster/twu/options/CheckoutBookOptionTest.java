@@ -49,7 +49,7 @@ public class CheckoutBookOptionTest {
     }
 
     @Test
-    public void shouldCheckIfBookHasBeenCheckedOutWhenRun() throws Exception {
+    public void shouldCheckIfBookWithTitleIsAvailableWhenRun() throws Exception {
         String bookTitle = "Title of Book";
         when(bufferedReader.readLine()).thenReturn(bookTitle);
         option.run();
