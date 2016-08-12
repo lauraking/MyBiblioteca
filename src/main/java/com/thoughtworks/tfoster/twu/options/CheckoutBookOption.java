@@ -31,7 +31,9 @@ public class CheckoutBookOption implements MenuOption {
 
         if(library.isBookAvailable(title)) {
             library.checkoutBook(title);
-            printStream.println("Thank you! Enjoy the book");
+            printStream.println("Thank you! Enjoy the book.");
+        } else {
+            printStream.println("That book is not available.");
         }
     }
 

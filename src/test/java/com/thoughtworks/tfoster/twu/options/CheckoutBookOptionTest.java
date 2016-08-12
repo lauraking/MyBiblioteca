@@ -64,6 +64,16 @@ public class CheckoutBookOptionTest {
         when(library.isBookAvailable(bookTitle)).thenReturn(true);
         option.run();
 
-        verify(printStream).println("Thank you! Enjoy the book");
+        verify(printStream).println("Thank you! Enjoy the book.");
+    }
+
+    @Test
+    public void shouldPrintErrorMessageIfBookIsNotAvailable() throws Exception {
+        String bookTitle = "Title of Book";
+        when(bufferedReader.readLine()).thenReturn(bookTitle);
+        when(library.isBookAvailable(bookTitle)).thenReturn(false);
+        option.run();
+
+        verify(printStream).println("That book is not available.");
     }
 }
