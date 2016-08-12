@@ -13,21 +13,22 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        ArrayList<Book> initialLibrary = new ArrayList<>();
+        ArrayList<Book> books = new ArrayList<>();
         PrintStream printStream = System.out;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        initialLibrary.add(new Book("Book 147238426738423764", "Author 1", "2001", printStream));
-        initialLibrary.add(new Book("Book 2", "Author 2", "2002", printStream));
-        initialLibrary.add(new Book("Book 3", "Author 3", "2003", printStream));
+        books.add(new Book("Proton", "Author 1", "2001", printStream));
+        books.add(new Book("Electron", "Author 2", "2002", printStream));
+        books.add(new Book("Neutron", "Author 3", "2003", printStream));
+        Library library = new Library(books);
 
         ArrayList<MenuOption> options = new ArrayList<>();
-        options.add(new PrintLibraryOption(initialLibrary));
+        options.add(new PrintLibraryOption(library));
         options.add(new CheckoutBookOption(printStream, reader));
 
 
         MainMenu mainMenu = new MainMenu(printStream, reader, options);
-        Biblioteca biblioteca = new Biblioteca(printStream, initialLibrary, mainMenu);
+        Biblioteca biblioteca = new Biblioteca(printStream, mainMenu);
         options.add(new QuitOption(biblioteca));
 
         biblioteca.start();

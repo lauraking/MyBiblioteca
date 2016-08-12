@@ -54,7 +54,7 @@ public class BibliotecaTest {
         book3 = mock(Book.class);
         mainMenu = mock(MainMenu.class);
 
-        biblioteca = new Biblioteca(printStream, makePopulatedLibrary(), mainMenu);
+        biblioteca = new Biblioteca(printStream, mainMenu);
     }
 
     @Test
