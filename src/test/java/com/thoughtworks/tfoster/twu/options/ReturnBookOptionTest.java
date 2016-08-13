@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.BufferedReader;
+import java.io.PrintStream;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -15,12 +16,21 @@ public class ReturnBookOptionTest {
     private Library library;
     private BufferedReader reader;
     private ReturnBookOption option;
+    private PrintStream printStream;
 
     @Before
     public void setUp() throws Exception {
         library = mock(Library.class);
         reader = mock(BufferedReader.class);
-        option = new ReturnBookOption(library, reader);
+        printStream = mock(PrintStream.class);
+        option = new ReturnBookOption(library, printStream, reader);
+    }
+
+    @Test
+    public void shouldInformUserOfPromptWhenRun() throws Exception {
+        option.run();
+
+        verify(printStream).println("Type in the title of the book you want to return:");
     }
 
     @Test
