@@ -1,6 +1,7 @@
 package com.thoughtworks.tfoster.twu;
 
 import com.thoughtworks.tfoster.twu.options.*;
+import com.thoughtworks.tfoster.twu.util.BookCollection;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -21,7 +22,7 @@ public class Main {
 
         Collection<Book> checkedOutBooks = new ArrayList<>();
 
-        Library library = new Library(books, checkedOutBooks);
+        Library library = new Library(new BookCollection(books), new BookCollection(checkedOutBooks));
 
         ArrayList<MenuOption> options = new ArrayList<>();
         options.add(new PrintLibraryOption(library));

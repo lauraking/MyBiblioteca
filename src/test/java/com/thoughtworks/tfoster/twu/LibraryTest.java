@@ -1,82 +1,73 @@
 package com.thoughtworks.tfoster.twu;
 
+import com.thoughtworks.tfoster.twu.util.BookCollection;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 public class LibraryTest {
 
-    private Book book1;
-    private Book book2;
-    private Book book3;
-    private Book book4;
-    private Collection<Book> books;
-    private Collection<Book> checkedOutBooks;
+    private BookCollection availableBooks;
+    private BookCollection checkedOutBooks;
     private Library library;
 
     @Before
     public void setUp() throws Exception {
-        book1 = mock(Book.class);
-        book2 = mock(Book.class);
-        book3 = mock(Book.class);
-        book4 = mock(Book.class);
-        books = new ArrayList<>();
-        books.add(book1);
-        books.add(book2);
-        books.add(book3);
+        availableBooks = mock(BookCollection.class);
+        checkedOutBooks = mock(BookCollection.class);
 
-        checkedOutBooks = new ArrayList<>();
-        checkedOutBooks.add(book4);
-
-        library = new Library(books, checkedOutBooks);
+        library = new Library(availableBooks, checkedOutBooks);
     }
 
     @Test
-    public void shouldSeeBooksWhenPrinted() throws Exception {
+    public void shouldConsultAvailableBooksWhenCheckingIfABookIsAvailable() throws Exception {
+        library.isBookAvailable("Title");
+
+        verify(availableBooks).contains("Title");
+    }
+
+    @Test
+    public void shouldConsultCheckedOutBooksWhenCheckingIfABookIsCheckedOut() throws Exception {
+        library.isBookCheckedOut("Title");
+
+        verify(checkedOutBooks).contains("Title");
+    }
+
+    @Test
+    public void shouldMoveBookToCheckedOutBooksWhenCheckingOutABook() throws Exception {
+        library.checkoutBook("Title");
+
+        verify(availableBooks).moveToCollection("Title", checkedOutBooks);
+    }
+
+    @Test
+    public void shouldMoveBookToAvailableBooksWhenReturningABook() throws Exception {
+        library.returnBook("Title");
+
+        verify(checkedOutBooks).moveToCollection("Title", availableBooks);
+    }
+
+    @Test
+    public void shouldPrintAvailableBooksWhenPrinted() throws Exception {
+        Book book1 = mock(Book.class);
+        Book book2 = mock(Book.class);
+        Book book3 = mock(Book.class);
+        Collection<Book> availableBackend = new ArrayList<>();
+        availableBackend.add(book1);
+        availableBackend.add(book2);
+        Collection<Book> checkedOutBackend = new ArrayList<>();
+        checkedOutBackend.add(book3);
+
+        library = new Library(new BookCollection(availableBackend), new BookCollection(checkedOutBackend));
         library.print();
 
         verify(book1).print();
         verify(book2).print();
-        verify(book3).print();
+        verify(book3, never()).print();
     }
 
-    @Test
-    public void shouldNotContainBookInAvailableBooksWhenBookIsCheckedOut() throws Exception {
-        String title = "Title of book";
-        when(book2.hasTitle(title)).thenReturn(true);
-        library.checkoutBook(title);
-
-        assertFalse(books.contains(book2));
-    }
-
-    @Test
-    public void shouldReturnTrueWhenBookIsInLibrary() throws Exception {
-        when(book2.hasTitle("Title")).thenReturn(true);
-
-        assertThat(library.isBookAvailable("Title"), is(true));
-    }
-
-    @Test
-    public void shouldReturnFalseWhenBookIsNotInLibrary() throws Exception {
-        assertThat(library.isBookAvailable("Title"), is(false));
-    }
-
-    @Test
-    public void shouldReturnTrueWhenBookIsCheckedOut() throws Exception {
-        when(book4.hasTitle("Title")).thenReturn(true);
-
-        assertThat(library.isBookCheckedOut("Title"), is(true));
-    }
-
-    @Test
-    public void shouldReturnFalseWhenBookIsNotCheckedOut() throws Exception {
-        assertThat(library.isBookCheckedOut("Title"), is(false));
-    }
 }

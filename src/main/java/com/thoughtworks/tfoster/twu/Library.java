@@ -1,46 +1,36 @@
 package com.thoughtworks.tfoster.twu;
 
-import java.util.Collection;
+import com.thoughtworks.tfoster.twu.util.BookCollection;
 
 public class Library {
 
-    private Collection<Book> books;
-    private Collection<Book> checkedOutBooks;
+    private BookCollection availableBooks;
+    private BookCollection checkedOutBooks;
 
-    public Library(Collection<Book> books, Collection<Book> checkedOutBooks) {
-        this.books = books;
+    public Library(BookCollection availableBooks, BookCollection checkedOutBooks) {
+        this.availableBooks = availableBooks;
         this.checkedOutBooks = checkedOutBooks;
     }
 
     public void print() {
-        for(Book book : books)
+        for(Book book : availableBooks)
             book.print();
     }
 
-    public void checkoutBook(String bookTitle) {
-        books.remove(getBookWithTitle(bookTitle));
+    public void checkoutBook(String title) {
+        availableBooks.moveToCollection(title, checkedOutBooks);
     }
 
-    public void returnBook(String bookTitle) {
-
+    public void returnBook(String title) {
+        checkedOutBooks.moveToCollection(title, availableBooks);
     }
 
     public boolean isBookAvailable(String title) {
-        return getBookWithTitle(title) != null;
-    }
-
-    private Book getBookWithTitle(String title) {
-        for(Book book : books)
-            if(book.hasTitle(title))
-                return book;
-        return null;
+        return availableBooks.contains(title);
     }
 
     public boolean isBookCheckedOut(String title) {
-        for(Book book : checkedOutBooks) {
-            if(book.hasTitle(title))
-                return true;
-        }
-        return false;
+        return checkedOutBooks.contains(title);
     }
+
 }
