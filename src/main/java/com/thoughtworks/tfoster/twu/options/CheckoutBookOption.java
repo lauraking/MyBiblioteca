@@ -27,6 +27,7 @@ public class CheckoutBookOption implements MenuOption {
     public void run() {
         printStream.println("Type in the title of the book you want to check out:");
 
+        printStream.print("> ");
         String title = readTitleFromUser();
 
         if(library.isBookAvailable(title)) {

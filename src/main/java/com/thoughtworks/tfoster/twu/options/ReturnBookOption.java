@@ -27,6 +27,7 @@ public class ReturnBookOption implements MenuOption {
     public void run() {
         printStream.println("Type in the title of the book you want to return:");
 
+        printStream.print("> ");
         String userInput = "";
 
         try {
@@ -37,6 +38,9 @@ public class ReturnBookOption implements MenuOption {
 
         if(library.isBookCheckedOut(userInput)) {
             library.returnBook(userInput);
+            printStream.println("Thank you for returning the book.");
         }
+        else
+            printStream.println("That is not a valid book to return.");
     }
 }

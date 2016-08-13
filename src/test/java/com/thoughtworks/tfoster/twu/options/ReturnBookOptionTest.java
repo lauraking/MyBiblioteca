@@ -59,4 +59,23 @@ public class ReturnBookOptionTest {
         verify(library).isBookCheckedOut(title);
     }
 
+    @Test
+    public void shouldPrintSuccessMessageIfBookHasBeenReturned() throws Exception {
+        String bookTitle = "Title of Book";
+        when(reader.readLine()).thenReturn(bookTitle);
+        when(library.isBookCheckedOut(bookTitle)).thenReturn(true);
+        option.run();
+
+        verify(printStream).println("Thank you for returning the book.");
+    }
+
+    @Test
+    public void shouldPrintErrorMessageIfBookIsNotCheckedOut() throws Exception {
+        String bookTitle = "Title of Book";
+        when(reader.readLine()).thenReturn(bookTitle);
+        when(library.isBookAvailable(bookTitle)).thenReturn(false);
+        option.run();
+
+        verify(printStream).println("That is not a valid book to return.");
+    }
 }
