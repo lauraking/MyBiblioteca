@@ -1,6 +1,6 @@
 package com.thoughtworks.tfoster.twu;
 
-import com.thoughtworks.tfoster.twu.util.BookCollection;
+import com.thoughtworks.tfoster.twu.util.MediaCollection;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,14 +11,14 @@ import static org.mockito.Mockito.*;
 
 public class LibraryTest {
 
-    private BookCollection availableBooks;
-    private BookCollection checkedOutBooks;
+    private MediaCollection availableBooks;
+    private MediaCollection checkedOutBooks;
     private Library library;
 
     @Before
     public void setUp() throws Exception {
-        availableBooks = mock(BookCollection.class);
-        checkedOutBooks = mock(BookCollection.class);
+        availableBooks = mock(MediaCollection.class);
+        checkedOutBooks = mock(MediaCollection.class);
 
         library = new Library(availableBooks, checkedOutBooks);
     }
@@ -62,7 +62,7 @@ public class LibraryTest {
         Collection<Book> checkedOutBackend = new ArrayList<>();
         checkedOutBackend.add(book3);
 
-        library = new Library(new BookCollection(availableBackend), new BookCollection(checkedOutBackend));
+        library = new Library(new MediaCollection(availableBackend), new MediaCollection(checkedOutBackend));
         library.print();
 
         verify(book1).print();

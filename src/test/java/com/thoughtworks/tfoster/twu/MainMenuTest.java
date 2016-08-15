@@ -1,7 +1,7 @@
 package com.thoughtworks.tfoster.twu;
 
 import com.thoughtworks.tfoster.twu.options.MenuOption;
-import com.thoughtworks.tfoster.twu.options.PrintLibraryOption;
+import com.thoughtworks.tfoster.twu.options.ListBooksOption;
 import com.thoughtworks.tfoster.twu.options.QuitOption;
 import com.thoughtworks.tfoster.twu.options.ReturnBookOption;
 import org.junit.Before;
@@ -34,9 +34,9 @@ public class MainMenuTest {
 
     @Test
     public void shouldSeeListBooksWhenListingBooksIsAnOption() throws Exception {
-        PrintLibraryOption printLibraryOption = mock(PrintLibraryOption.class);
-        when(printLibraryOption.title()).thenCallRealMethod();
-        options.add(printLibraryOption);
+        ListBooksOption listBooksOption = mock(ListBooksOption.class);
+        when(listBooksOption.title()).thenCallRealMethod();
+        options.add(listBooksOption);
         mainMenu.showMenu();
 
         verify(printStream).print("List Books");
@@ -64,12 +64,12 @@ public class MainMenuTest {
 
     @Test
     public void shouldSeeBothListBooksAndQuitWhenBothListingBooksAndQuittingAreOptions() throws Exception {
-        PrintLibraryOption printLibraryOption = mock(PrintLibraryOption.class);
-        when(printLibraryOption.title()).thenCallRealMethod();
+        ListBooksOption listBooksOption = mock(ListBooksOption.class);
+        when(listBooksOption.title()).thenCallRealMethod();
         QuitOption quitOption = mock(QuitOption.class);
         when(quitOption.title()).thenCallRealMethod();
 
-        options.add(printLibraryOption);
+        options.add(listBooksOption);
         options.add(quitOption);
         mainMenu.showMenu();
 

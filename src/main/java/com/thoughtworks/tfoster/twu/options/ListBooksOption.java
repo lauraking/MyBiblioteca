@@ -2,11 +2,11 @@ package com.thoughtworks.tfoster.twu.options;
 
 import com.thoughtworks.tfoster.twu.Library;
 
-public class PrintLibraryOption implements MenuOption {
+public class ListBooksOption implements MenuOption {
 
     private Library library;
 
-    public PrintLibraryOption(Library library) {
+    public ListBooksOption(Library library) {
         this.library = library;
     }
 

@@ -1,7 +1,6 @@
 package com.thoughtworks.tfoster.twu.util;
 
 import com.thoughtworks.tfoster.twu.Book;
-import com.thoughtworks.tfoster.twu.Library;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +16,7 @@ public class BookCollectionTest {
 
     private Book book;
     private Collection<Book> collectionBackend;
-    private BookCollection collection;
+    private MediaCollection collection;
 
     @Before
     public void setUp() throws Exception {
@@ -25,7 +24,7 @@ public class BookCollectionTest {
         collectionBackend = new ArrayList<>();
         collectionBackend.add(book);
 
-        collection = new BookCollection(collectionBackend);
+        collection = new MediaCollection(collectionBackend);
     }
 
     @Test
@@ -44,7 +43,7 @@ public class BookCollectionTest {
     public void shouldNotHaveTheBookAnymoreAfterMovingBookToAnotherCollection() throws Exception {
         String title = "Book Title";
         when(book.hasTitle(title)).thenReturn(true);
-        collection.moveToCollection(title, new BookCollection(new ArrayList<Book>()));
+        collection.moveToCollection(title, new MediaCollection(new ArrayList<Book>()));
 
         assertThat(collectionBackend.contains(book), is(false));
     }
@@ -54,7 +53,7 @@ public class BookCollectionTest {
         String title = "Book title";
         when(book.hasTitle(title)).thenReturn(true);
         Collection<Book> otherBackend = new ArrayList<>();
-        collection.moveToCollection(title, new BookCollection(otherBackend));
+        collection.moveToCollection(title, new MediaCollection(otherBackend));
 
         assertThat(otherBackend.contains(book), is(true));
     }

@@ -5,11 +5,11 @@ import com.thoughtworks.tfoster.twu.Book;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class BookCollection implements Iterable<Book> {
+public class MediaCollection implements Iterable<Book> {
 
     private Collection<Book> books;
 
-    public BookCollection(Collection<Book> books) {
+    public MediaCollection(Collection<Book> books) {
         this.books = books;
     }
 
@@ -19,7 +19,7 @@ public class BookCollection implements Iterable<Book> {
         return books.iterator();
     }
 
-    public void moveToCollection(String title, BookCollection other) {
+    public void moveToCollection(String title, MediaCollection other) {
         Book book = getBookWithTitle(title);
         if(books.remove(book))
             other.books.add(book);
@@ -28,7 +28,6 @@ public class BookCollection implements Iterable<Book> {
     public boolean contains(String title) {
         return getBookWithTitle(title) != null;
     }
-
 
     private Book getBookWithTitle(String title) {
         for(Book book : books)

@@ -1,7 +1,7 @@
 package com.thoughtworks.tfoster.twu;
 
 import com.thoughtworks.tfoster.twu.options.*;
-import com.thoughtworks.tfoster.twu.util.BookCollection;
+import com.thoughtworks.tfoster.twu.util.MediaCollection;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -22,10 +22,10 @@ public class Main {
 
         Collection<Book> checkedOutBooks = new ArrayList<>();
 
-        Library library = new Library(new BookCollection(books), new BookCollection(checkedOutBooks));
+        Library library = new Library(new MediaCollection(books), new MediaCollection(checkedOutBooks));
 
         ArrayList<MenuOption> options = new ArrayList<>();
-        options.add(new PrintLibraryOption(library));
+        options.add(new ListBooksOption(library));
         options.add(new CheckoutBookOption(library, printStream, reader));
         options.add(new ReturnBookOption(library, printStream, reader));
 
@@ -35,5 +35,7 @@ public class Main {
 
         biblioteca.start();
     }
+
+
 
 }

@@ -1,13 +1,13 @@
 package com.thoughtworks.tfoster.twu;
 
-import com.thoughtworks.tfoster.twu.util.BookCollection;
+import com.thoughtworks.tfoster.twu.util.MediaCollection;
 
 public class Library {
 
-    private BookCollection availableBooks;
-    private BookCollection checkedOutBooks;
+    private MediaCollection availableBooks;
+    private MediaCollection checkedOutBooks;
 
-    public Library(BookCollection availableBooks, BookCollection checkedOutBooks) {
+    public Library(MediaCollection availableBooks, MediaCollection checkedOutBooks) {
         this.availableBooks = availableBooks;
         this.checkedOutBooks = checkedOutBooks;
     }
