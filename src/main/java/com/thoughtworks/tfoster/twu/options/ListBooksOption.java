@@ -17,6 +17,6 @@ public class ListBooksOption implements MenuOption {
 
     @Override
     public void run() {
-        library.print();
+        library.printAvailableMedia();
     }
 }

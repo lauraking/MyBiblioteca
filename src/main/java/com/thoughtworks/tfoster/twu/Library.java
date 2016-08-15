@@ -1,36 +1,35 @@
 package com.thoughtworks.tfoster.twu;
 
-import com.thoughtworks.tfoster.twu.util.MediaCollection;
 
 public class Library {
 
-    private MediaCollection availableBooks;
-    private MediaCollection checkedOutBooks;
+    private MediaCollection availableMediaItems;
+    private MediaCollection checkedOutMediaItems;
 
-    public Library(MediaCollection availableBooks, MediaCollection checkedOutBooks) {
-        this.availableBooks = availableBooks;
-        this.checkedOutBooks = checkedOutBooks;
+    public Library(MediaCollection availableMediaItems, MediaCollection checkedOutMediaItems) {
+        this.availableMediaItems = availableMediaItems;
+        this.checkedOutMediaItems = checkedOutMediaItems;
     }
 
-    public void print() {
-        for(Book book : availableBooks)
-            book.print();
+    public void printAvailableMedia() {
+        for(MediaItem mediaItem : availableMediaItems)
+            mediaItem.printDetails();
     }
 
     public void checkoutBook(String title) {
-        availableBooks.moveToCollection(title, checkedOutBooks);
+        availableMediaItems.moveToCollection(title, checkedOutMediaItems);
     }
 
     public void returnBook(String title) {
-        checkedOutBooks.moveToCollection(title, availableBooks);
+        checkedOutMediaItems.moveToCollection(title, availableMediaItems);
     }
 
     public boolean isBookAvailable(String title) {
-        return availableBooks.contains(title);
+        return availableMediaItems.contains(title);
     }
 
     public boolean isBookCheckedOut(String title) {
-        return checkedOutBooks.contains(title);
+        return checkedOutMediaItems.contains(title);
     }
 
 }

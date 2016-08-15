@@ -11,7 +11,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class ReturnBookOptionTest {
+public class ReturnMediaItemOptionTest {
 
     private Library library;
     private BufferedReader reader;
@@ -52,7 +52,7 @@ public class ReturnBookOptionTest {
 
     @Test
     public void shouldCheckIfBookWithTitleIsCheckedOutWhenRun() throws Exception {
-        String title = "Book Title";
+        String title = "MediaItem Title";
         when(reader.readLine()).thenReturn(title);
         option.run();
 
@@ -61,7 +61,7 @@ public class ReturnBookOptionTest {
 
     @Test
     public void shouldPrintSuccessMessageIfBookHasBeenReturned() throws Exception {
-        String bookTitle = "Title of Book";
+        String bookTitle = "Title of MediaItem";
         when(reader.readLine()).thenReturn(bookTitle);
         when(library.isBookCheckedOut(bookTitle)).thenReturn(true);
         option.run();
@@ -71,7 +71,7 @@ public class ReturnBookOptionTest {
 
     @Test
     public void shouldPrintErrorMessageIfBookIsNotCheckedOut() throws Exception {
-        String bookTitle = "Title of Book";
+        String bookTitle = "Title of MediaItem";
         when(reader.readLine()).thenReturn(bookTitle);
         when(library.isBookAvailable(bookTitle)).thenReturn(false);
         option.run();

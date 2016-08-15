@@ -1,6 +1,5 @@
 package com.thoughtworks.tfoster.twu;
 
-import com.thoughtworks.tfoster.twu.util.MediaCollection;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,63 +10,63 @@ import static org.mockito.Mockito.*;
 
 public class LibraryTest {
 
-    private MediaCollection availableBooks;
-    private MediaCollection checkedOutBooks;
+    private MediaCollection availableMedia;
+    private MediaCollection checkedOutMedia;
     private Library library;
 
     @Before
     public void setUp() throws Exception {
-        availableBooks = mock(MediaCollection.class);
-        checkedOutBooks = mock(MediaCollection.class);
+        availableMedia = mock(MediaCollection.class);
+        checkedOutMedia = mock(MediaCollection.class);
 
-        library = new Library(availableBooks, checkedOutBooks);
+        library = new Library(availableMedia, checkedOutMedia);
     }
 
     @Test
     public void shouldConsultAvailableBooksWhenCheckingIfABookIsAvailable() throws Exception {
         library.isBookAvailable("Title");
 
-        verify(availableBooks).contains("Title");
+        verify(availableMedia).contains("Title");
     }
 
     @Test
     public void shouldConsultCheckedOutBooksWhenCheckingIfABookIsCheckedOut() throws Exception {
         library.isBookCheckedOut("Title");
 
-        verify(checkedOutBooks).contains("Title");
+        verify(checkedOutMedia).contains("Title");
     }
 
     @Test
     public void shouldMoveBookToCheckedOutBooksWhenCheckingOutABook() throws Exception {
         library.checkoutBook("Title");
 
-        verify(availableBooks).moveToCollection("Title", checkedOutBooks);
+        verify(availableMedia).moveToCollection("Title", checkedOutMedia);
     }
 
     @Test
     public void shouldMoveBookToAvailableBooksWhenReturningABook() throws Exception {
         library.returnBook("Title");
 
-        verify(checkedOutBooks).moveToCollection("Title", availableBooks);
+        verify(checkedOutMedia).moveToCollection("Title", availableMedia);
     }
 
     @Test
     public void shouldPrintAvailableBooksWhenPrinted() throws Exception {
-        Book book1 = mock(Book.class);
-        Book book2 = mock(Book.class);
-        Book book3 = mock(Book.class);
-        Collection<Book> availableBackend = new ArrayList<>();
-        availableBackend.add(book1);
-        availableBackend.add(book2);
-        Collection<Book> checkedOutBackend = new ArrayList<>();
-        checkedOutBackend.add(book3);
+        MediaItem mediaItem1 = mock(MediaItem.class);
+        MediaItem mediaItem2 = mock(MediaItem.class);
+        MediaItem mediaItem3 = mock(MediaItem.class);
+        Collection<MediaItem> availableBackend = new ArrayList<>();
+        availableBackend.add(mediaItem1);
+        availableBackend.add(mediaItem2);
+        Collection<MediaItem> checkedOutBackend = new ArrayList<>();
+        checkedOutBackend.add(mediaItem3);
 
         library = new Library(new MediaCollection(availableBackend), new MediaCollection(checkedOutBackend));
-        library.print();
+        library.printAvailableMedia();
 
-        verify(book1).print();
-        verify(book2).print();
-        verify(book3, never()).print();
+        verify(mediaItem1).printDetails();
+        verify(mediaItem2).printDetails();
+        verify(mediaItem3, never()).printDetails();
     }
 
 }

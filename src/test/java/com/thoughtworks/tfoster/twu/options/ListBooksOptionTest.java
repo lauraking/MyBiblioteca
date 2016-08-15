@@ -14,7 +14,7 @@ public class ListBooksOptionTest {
         ListBooksOption option = new ListBooksOption(library);
         option.run();
 
-        verify(library).print();
+        verify(library).printAvailableMedia();
     }
 
 }

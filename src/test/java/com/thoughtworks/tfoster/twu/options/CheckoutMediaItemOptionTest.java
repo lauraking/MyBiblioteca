@@ -9,7 +9,7 @@ import java.io.PrintStream;
 
 import static org.mockito.Mockito.*;
 
-public class CheckoutBookOptionTest {
+public class CheckoutMediaItemOptionTest {
 
     private PrintStream printStream;
     private CheckoutBookOption option;
@@ -40,7 +40,7 @@ public class CheckoutBookOptionTest {
 
     @Test
     public void shouldCheckoutSpecifiedBookFromLibraryWhenRun() throws Exception {
-        String bookTitle = "Title of Book";
+        String bookTitle = "Title of MediaItem";
         when(bufferedReader.readLine()).thenReturn(bookTitle);
         when(library.isBookAvailable(bookTitle)).thenReturn(true);
         option.run();
@@ -50,7 +50,7 @@ public class CheckoutBookOptionTest {
 
     @Test
     public void shouldCheckIfBookWithTitleIsAvailableWhenRun() throws Exception {
-        String bookTitle = "Title of Book";
+        String bookTitle = "Title of MediaItem";
         when(bufferedReader.readLine()).thenReturn(bookTitle);
         option.run();
 
@@ -59,7 +59,7 @@ public class CheckoutBookOptionTest {
 
     @Test
     public void shouldPrintSuccessMessageIfBookHasBeenCheckedOut() throws Exception {
-        String bookTitle = "Title of Book";
+        String bookTitle = "Title of MediaItem";
         when(bufferedReader.readLine()).thenReturn(bookTitle);
         when(library.isBookAvailable(bookTitle)).thenReturn(true);
         option.run();
@@ -69,7 +69,7 @@ public class CheckoutBookOptionTest {
 
     @Test
     public void shouldPrintErrorMessageIfBookIsNotAvailable() throws Exception {
-        String bookTitle = "Title of Book";
+        String bookTitle = "Title of MediaItem";
         when(bufferedReader.readLine()).thenReturn(bookTitle);
         when(library.isBookAvailable(bookTitle)).thenReturn(false);
         option.run();

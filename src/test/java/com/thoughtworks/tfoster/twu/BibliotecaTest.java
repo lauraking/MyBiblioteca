@@ -15,20 +15,20 @@ public class BibliotecaTest {
 
     private PrintStream printStream;
     private Biblioteca biblioteca;
-    private Book book1;
-    private Book book2;
-    private Book book3;
+    private MediaItem mediaItem1;
+    private MediaItem mediaItem2;
+    private MediaItem mediaItem3;
     private MainMenu mainMenu;
 
-    private ArrayList<Book> makeEmptyLibrary() {
+    private ArrayList<MediaItem> makeEmptyLibrary() {
         return new ArrayList<>();
     }
 
-    private ArrayList<Book> makePopulatedLibrary() {
-        ArrayList<Book> library = makeEmptyLibrary();
-        library.add(book1);
-        library.add(book2);
-        library.add(book3);
+    private ArrayList<MediaItem> makePopulatedLibrary() {
+        ArrayList<MediaItem> library = makeEmptyLibrary();
+        library.add(mediaItem1);
+        library.add(mediaItem2);
+        library.add(mediaItem3);
         return library;
     }
 
@@ -49,9 +49,9 @@ public class BibliotecaTest {
     @Before
     public void setUp() throws Exception {
         printStream = mock(PrintStream.class);
-        book1 = mock(Book.class);
-        book2 = mock(Book.class);
-        book3 = mock(Book.class);
+        mediaItem1 = mock(MediaItem.class);
+        mediaItem2 = mock(MediaItem.class);
+        mediaItem3 = mock(MediaItem.class);
         mainMenu = mock(MainMenu.class);
 
         biblioteca = new Biblioteca(printStream, mainMenu);
